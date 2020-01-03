@@ -25,7 +25,7 @@ const colors = {
   }
 };
 
-function generateHTML(data) {
+function generateHTML({data, response}) {
   return `<!DOCTYPE html>
 <html lang="en">
    <head>
@@ -35,7 +35,14 @@ function generateHTML(data) {
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"/>
       <link href="https://fonts.googleapis.com/css?family=BioRhyme|Cabin&display=swap" rel="stylesheet">
       <title>Document</title>
-      
+      <body>
+            <h1> My name is ${response.username}!</h1>
+            <p> My number of followers is ${response.followers}<br>
+            And I am following ${response.following} people.
+
+
+      </body>
+
       <style>
           @page {
             margin: 0;
@@ -177,5 +184,6 @@ function generateHTML(data) {
 
 
 module.exports = {
-  generateHTML: generateHTML
+  generateHTML: generateHTML,
+  colors: colors 
 }
