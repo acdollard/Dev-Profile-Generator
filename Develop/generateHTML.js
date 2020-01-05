@@ -34,14 +34,9 @@ function generateHTML({data, response}) {
       <meta http-equiv="X-UA-Compatible" content="ie=edge" />
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"/>
       <link href="https://fonts.googleapis.com/css?family=BioRhyme|Cabin&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
       <title>Document</title>
-      <body>
-            <h1> My name is ${response.username}!</h1>
-            <p> My number of followers is ${response.followers}<br>
-            And I am following ${response.following} people.
 
-
-      </body>
 
       <style>
           @page {
@@ -178,7 +173,58 @@ function generateHTML({data, response}) {
             zoom: .75; 
           } 
          }
-      </style>`
+      </style>
+      
+<body>
+      <div class="container">
+         <div class="wrapper">
+            <div class= "row" >
+              <div class = "col-sm-10 photo-header">
+                <img src=${photo}>
+                <h1>Hi!</h1>
+                <h2>My name is ${regularName}</h2>
+                <div class="links-nav col-sm-10">
+                  <a href=${location} class="nav-link">Location</a>
+                  <a href=${githubURL} class="nav-link">GitHub</a>
+                  <a href=${blog} class="nav-link">Blog</a>
+                </div>
+              </div>
+            <div class = "row">
+                <div class = "main col-sm-12">
+                <div class="row">
+                  <h3>${bio}</h3>
+                </div>
+                <div class="row">
+                  <div class = "card">
+                    <h4>Public Repositories</h4>
+                    <p>${pubRepos}</p>
+                  </div>
+                  <div class = "card">
+                    <h4>Followers</h4>
+                    <p>${followes}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class = "card">
+                    <h4>GitHub Stars</h4>
+                    <p>${starredRepos}</p>
+                  </div>
+                  <div class = "card">
+                    <h4>Following</h4>
+                    <p>${following}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            </div>
+         </div>
+      
+      
+      </div>
+
+
+</body>`
         }
 
 
