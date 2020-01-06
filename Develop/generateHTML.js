@@ -25,7 +25,7 @@ const colors = {
   }
 };
 
-function generateHTML({data, response}) {
+function generateHTML(username, regularName, photo, githubURL, blog, bio, pubRepos, followers, following, data) {
   return `<!DOCTYPE html>
 <html lang="en">
    <head>
@@ -184,7 +184,7 @@ function generateHTML({data, response}) {
                 <h1>Hi!</h1>
                 <h2>My name is ${regularName}</h2>
                 <div class="links-nav col-sm-10">
-                  <a href=${location} class="nav-link">Location</a>
+                  <a href=location class="nav-link">Location</a>
                   <a href=${githubURL} class="nav-link">GitHub</a>
                   <a href=${blog} class="nav-link">Blog</a>
                 </div>
@@ -201,13 +201,13 @@ function generateHTML({data, response}) {
                   </div>
                   <div class = "card">
                     <h4>Followers</h4>
-                    <p>${followes}</p>
+                    <p>${followers}</p>
                   </div>
                 </div>
                 <div class="row">
                   <div class = "card">
                     <h4>GitHub Stars</h4>
-                    <p>${starredRepos}</p>
+                    <p></p>
                   </div>
                   <div class = "card">
                     <h4>Following</h4>

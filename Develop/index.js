@@ -1,4 +1,5 @@
 const fs = require("fs");
+    convertFactory = require("electron-html-to");
 const axios = require("axios");
 const inquirer = require("inquirer");
 const generateHTML = require("./generateHTML");
@@ -58,7 +59,9 @@ const generateHTML_ASYNC = util.promisify(generateHTML.generateHTML)
 
 
 
-
+const conversion = convertFactory({
+    converterPath: convertFactory.converters.PDF
+})
     
     function init() {
 
@@ -69,7 +72,7 @@ questions.then((data) =>
     const axios = axiosCall(data);
     axios.then((response) => 
     {
-        console.log(response.data)
+        // console.log(response.data)
         console.log("Hallo!")
         const username = response.data.login;
         const regularName = response.data.name;
@@ -79,19 +82,24 @@ questions.then((data) =>
         const bio = response.data.bio;
         const pubRepos = response.data.public_repos;
         const followers = response.data.followers;
-        const following = response.data.following
-        const htmlPage = generateHTML_ASYNC({data, response});
-        htmlPage.then((htmlCode) => 
-            {
-            console.log("Hi!")
-            return writeFileAsync(`${data.username}.html`, htmlCode)
-            })
-        htmlPage.catch(showError);
-        })
+        const following = response.data.following;
+        // const htmlPage = generateHTML_ASYNC({data, response});
+        const Newhtml = generateHTML.generateHTML(username, regularName, photo, githubURL, blog, bio, pubRepos, followers, following, data);
+    
+        conversion({html: Newhtml}, function(err, result){
+            if(err){
+                return console.log(err)
+            }
+                let pdfsMade = 1;
+            result.stream.pipe(fs.createWriteStream(`${username}2.pdf`));
+                pdfsMade ++; 
+        });
+
     axios.catch(showError);
     })
 questions.catch(showError);
-};
+});
+    };
 
 
 
