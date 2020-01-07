@@ -4,8 +4,6 @@ const axios = require("axios");
 const inquirer = require("inquirer");
 const generateHTML = require("./generateHTML");
 const util = require("util");
-const electron = require("electron");
-const electron_html_to = require("electron-html-to");
 
 
 
@@ -23,8 +21,6 @@ return inquirer
 };
 
 
-
-
 function axiosCall(data){
     const queryURL = `https://api.github.com/users/${data.username}`
    return axios.get(queryURL);
@@ -35,37 +31,11 @@ function axiosCall_starred_repos(data){
     return axios.get(starredQueryURL);
 }
 
-// AxiosCall_starred_repos().then((response) => {
-//     console.log(response.data.length)
-// })
-  
 
 
-
-// const writeFileAsync = util.promisify(fs.writeFile);
-// const generateHTML_ASYNC = util.promisify(generateHTML.generateHTML)
-
-
-
-
-
-    function showError() {
-        console.log("A goof dun occured!")
-    }
-
-
-
-
-
-// const questions = [
-    //inquirer function goes here? as well as axios call? 
-    // ];
-    
-    function writeToFile(fileName, data) {
-//writefile function goes here? 
-    }
-
-
+function showError() {
+    console.log("A goof dun occured!")
+}
 
 const conversion = convertFactory({
     converterPath: convertFactory.converters.PDF
@@ -107,7 +77,7 @@ questions.then((data) => {
                         if(err){
                             return console.log(err)
                         }
-                        result.stream.pipe(fs.createWriteStream(`${username}11.pdf`)); //need to figure out file naming convention
+                        result.stream.pipe(fs.createWriteStream(`${username}23.pdf`)); //need to figure out file naming convention
                     });
 
             });

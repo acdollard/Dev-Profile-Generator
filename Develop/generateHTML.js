@@ -57,7 +57,7 @@ function generateHTML(username, regularName, photo, githubURL, blog, bio, pubRep
          .wrapper {
          background-color: ${colors[data.color].wrapperBackground};
          padding-top: 100px;
-         padding-bottom: 50px;
+         padding-bottom: 100px;
          }
          body {
          background-color: white;
@@ -69,7 +69,8 @@ function generateHTML(username, regularName, photo, githubURL, blog, bio, pubRep
          height: auto;
          padding-top: 30px;
          padding-bottom: 30px; 
-         width: 85%; 
+         margin-left: 0px; 
+         margin-right: 0px; 
 
          }
          h1, h2, h3, h4, h5, h6 {
@@ -163,7 +164,8 @@ function generateHTML(username, regularName, photo, githubURL, blog, bio, pubRep
            border-radius: 6px;
            background-color: ${colors[data.color].headerBackground};
            color: ${colors[data.color].headerColor};
-           margin: 20px;
+           width: 36%;
+           margin: 30px; 
          }
          
          .col {
@@ -199,12 +201,12 @@ function generateHTML(username, regularName, photo, githubURL, blog, bio, pubRep
                 </div>
               </div>
             </div>
-            <div class = "row">
-              <div class = "main col-12">
-                <div class="row">
-                  <h3 class="col-10">${bio}</h3>
+  
+              <div class = "main">
+                <div class="row justify-content-center">
+                  <h4 class="col-10 text-center">${bio}</h4>
                 </div>
-                <div class="row col-12" >
+                <div class="row col-12 justify-content-center" >
                   <div class = "card">
                     <h4>Public Repositories</h4>
                     <h6>${pubRepos}</h6>
@@ -214,7 +216,7 @@ function generateHTML(username, regularName, photo, githubURL, blog, bio, pubRep
                     <h6>${followers}</h6>
                   </div>
                 </div>
-                <div class="row col-12">
+                <div class="row col-12 justify-content-center">
                   <div class = "card">
                     <h4>GitHub Stars</h4>
                     <h6>${starred}</h6>
@@ -225,7 +227,7 @@ function generateHTML(username, regularName, photo, githubURL, blog, bio, pubRep
                   </div>
                 </div>
               </div>
-            </div>
+
 
             </div>
          </div>
