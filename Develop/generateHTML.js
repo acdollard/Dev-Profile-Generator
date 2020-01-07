@@ -25,7 +25,7 @@ const colors = {
   }
 };
 
-function generateHTML(username, regularName, photo, githubURL, blog, bio, pubRepos, followers, following, data) {
+function generateHTML(username, regularName, photo, githubURL, blog, bio, pubRepos, followers, following, starred, data) {
   return `<!DOCTYPE html>
 <html lang="en">
    <head>
@@ -57,16 +57,20 @@ function generateHTML(username, regularName, photo, githubURL, blog, bio, pubRep
          .wrapper {
          background-color: ${colors[data.color].wrapperBackground};
          padding-top: 100px;
+         padding-bottom: 50px;
          }
          body {
          background-color: white;
          -webkit-print-color-adjust: exact !important;
          font-family: 'Cabin', sans-serif;
          }
-         main {
+         .main {
          background-color: #E9EDEE;
          height: auto;
          padding-top: 30px;
+         padding-bottom: 30px; 
+         width: 85%; 
+
          }
          h1, h2, h3, h4, h5, h6 {
          font-family: 'BioRhyme', serif;
@@ -80,15 +84,19 @@ function generateHTML(username, regularName, photo, githubURL, blog, bio, pubRep
          }
          h3 {
          font-size: 2em;
+         text-align: center; 
          }
          h4 {
          font-size: 1.5em;
+         text-align: center;
          }
          h5 {
          font-size: 1.3em;
+         text-align: center; 
          }
          h6 {
          font-size: 1.2em;
+         text-align: center; 
          }
          .photo-header {
          position: relative;
@@ -102,6 +110,7 @@ function generateHTML(username, regularName, photo, githubURL, blog, bio, pubRep
          padding: 10px;
          width: 95%;
          border-radius: 6px;
+         z-index: 1; 
          }
          .photo-header img {
          width: 250px;
@@ -189,29 +198,30 @@ function generateHTML(username, regularName, photo, githubURL, blog, bio, pubRep
                   <a href=${blog} class="nav-link">Blog</a>
                 </div>
               </div>
+            </div>
             <div class = "row">
-                <div class = "main col-sm-12">
+              <div class = "main col-12">
                 <div class="row">
-                  <h3>${bio}</h3>
+                  <h3 class="col-10">${bio}</h3>
                 </div>
-                <div class="row">
+                <div class="row col-12" >
                   <div class = "card">
                     <h4>Public Repositories</h4>
-                    <p>${pubRepos}</p>
+                    <h6>${pubRepos}</h6>
                   </div>
                   <div class = "card">
                     <h4>Followers</h4>
-                    <p>${followers}</p>
+                    <h6>${followers}</h6>
                   </div>
                 </div>
-                <div class="row">
+                <div class="row col-12">
                   <div class = "card">
                     <h4>GitHub Stars</h4>
-                    <p></p>
+                    <h6>${starred}</h6>
                   </div>
                   <div class = "card">
                     <h4>Following</h4>
-                    <p>${following}</p>
+                    <h6>${following}</h6>
                   </div>
                 </div>
               </div>
