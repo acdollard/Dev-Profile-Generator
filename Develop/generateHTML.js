@@ -195,9 +195,10 @@ function generateHTML(username, regularName, photo, githubURL, blog, bio, pubRep
                 <h1>Hi!</h1>
                 <h2>My name is ${regularName}</h2>
                 <div class="links-nav col-sm-10">
-                  <a href=location class="nav-link">Location</a>
-                  <a href=${githubURL} class="nav-link">GitHub</a>
-                  <a href=${blog} class="nav-link">Blog</a>
+                  <a href=location class="nav-link"><i class="fas fa-location-arrow"></i>
+                  Location</a>
+                  <a href=${githubURL} class="nav-link"><i class="fab fa-github"></i>GitHub</a>
+                  <a href=${blog} class="nav-link"><i class="fab fa-blogger"></i>Blog</a>
                 </div>
               </div>
             </div>

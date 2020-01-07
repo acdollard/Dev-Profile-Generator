@@ -77,7 +77,7 @@ questions.then((data) => {
                         if(err){
                             return console.log(err)
                         }
-                        result.stream.pipe(fs.createWriteStream(`${username}23.pdf`)); //need to figure out file naming convention
+                        result.stream.pipe(fs.createWriteStream(`${username}_1.pdf`)); //need to figure out file naming convention
                     });
 
             });
