@@ -9,4 +9,3 @@ This application is run via Node and requires nmp packages fs, inquirer, electro
 <img width="354" alt="Screen Shot 2020-01-07 at 7 49 47 PM" src="https://user-images.githubusercontent.com/55324845/71947989-3148d900-3194-11ea-9e40-712f5a28f3cd.png">
 
 
-[GIF] (../../)
