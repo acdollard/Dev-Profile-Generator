@@ -1,91 +1,79 @@
 const fs = require("fs");
-const electron = require("electron");
-    convertFactory = require("electron-html-to");
 const axios = require("axios");
 const inquirer = require("inquirer");
 const generateHTML = require("./generateHTML");
-const util = require("util");
+convertFactory = require("electron-html-to");
+const conversion = convertFactory({
+    converterPath: convertFactory.converters.PDF
+})
+
+let queryURL = null; 
+let username = null;
+let regularName = null;
+let photo = null;
+let githubURL = null;
+let blog = null;
+let bio = null;
+let pubRepos = null;
+let followers = null;
+let following = null;
+let data = null;
 
 
 
-function promptUser() { 
-return inquirer
-  .prompt
-([  {
+
+inquirer.prompt([  
+    {
     message: "Enter your GitHub username:",
     name: "username"
     },
     {
     message: "What is your favorite color?",
     name: "color"
-    }   ])
-};
+    }   
+]) 
+    .then(response => {
+        data = response;
+        queryURL = `https://api.github.com/users/${data.username}`;
+        return axios.get(queryURL);
 
-
-function axiosCall(data){
-    const queryURL = `https://api.github.com/users/${data.username}`
-   return axios.get(queryURL);
-   }
-
-function axiosCall_starred_repos(data){
-    const starredQueryURL = `https://api.github.com/users/${data.username}/starred`
-    return axios.get(starredQueryURL);
-}
-
-
-
-function showError() {
-    console.log("A goof dun occured!")
-}
-
-const conversion = convertFactory({
-    converterPath: convertFactory.converters.PDF
 })
-    
-
-//main functions call
-function init() {
-//calls inquirer function
-//resolves inquirer promise
-promptUser().then((data) => {
-
-    //first axios call for returning starred github repos
-    const axios_call_one = axiosCall_starred_repos(data);
-
-        //resolves first axios promise by saving relevant info as a const and then calling 2nd axios function
-        axios_call_one.then((response) => {
-        const starred = response.data.length
-        const axios_call_two = axiosCall(data);
-
-            //resolves 2nd axios function by saves user data as consts and then calling generateHTML function
-            axios_call_two.then((response) => {
-                console.log(response.data)
-                const username = response.data.login;
-                const regularName = response.data.name;
-                const photo = response.data.avatar_url;
-                const githubURL = response.data.url;
-                const blog = response.data.blog;
-                const bio = response.data.bio;
-                const pubRepos = response.data.public_repos;
-                const followers = response.data.followers;
-                const following = response.data.following;
-                //calls generateHTML function and passes it consts from the both axios calls 
-                const Newhtml = generateHTML.generateHTML(username, regularName, photo, githubURL, blog, bio, pubRepos, followers, following, starred, data);
+    .then(response => {
+        console.log(response)
+         starredQueryURL = queryURL + "/starred"; 
+         username = response.data.login;
+         regularName = response.data.name;
+         photo = response.data.avatar_url;
+         githubURL = response.data.url;
+         blog = response.data.blog;
+         bio = response.data.bio;
+         pubRepos = response.data.public_repos;
+         followers = response.data.followers;
+         following = response.data.following;
+        return axios.get(starredQueryURL);
+})
+    .then(result => {
+        let starred = result.data.length;
+        const Newhtml = generateHTML.generateHTML(username, regularName, photo, githubURL, blog, bio, pubRepos, followers, following, starred, data);
                 //converts the newly generated HTML to a pdf
                 conversion({html: Newhtml}, function(err, result){
                     if(err){
                         return console.log(err)
                     }
-                    result.stream.pipe(fs.createWriteStream(`${username}_5.pdf`)); //need to figure out file naming convention
+                    result.stream.pipe(fs.createWriteStream(`${username}_7.pdf`)); //need to figure out file naming convention
                     debugger; 
                     console.log("PDF successfully generated!");
+                    conversion.kill()
                 });
-                
-            }).catch(showError)
-    }).catch(showError)
-}).catch(showError);
-    };
+})
+    .catch(err => {
+        console.log(err);
+})
 
 
 
-init()
+
+
+
+
+
